@@ -79,6 +79,9 @@ class _HomeState extends State<Home> {
                               SizedBox(
                                 height: 20,
                               ),
+                              Text(
+                                "Don't have an account?"
+                              ),
                               //Button(textName: 'Cancel',)
                             ],
                           ),
@@ -155,7 +158,7 @@ class _ButtonState extends State<Button> {
       child: InkWell(
         borderRadius: BorderRadius.circular(50),
         onTap: () {
-          Navigator.pop(context);
+          //Navigator.pop(context);
         },
         child: Container(
           height: 83,
