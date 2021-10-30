@@ -14,9 +14,9 @@ class _ButtonState extends State<Button> {
   Widget build(BuildContext context) {
     return Material(
       color: Colors.red[800],
-      borderRadius: BorderRadius.circular(50),
+      borderRadius: BorderRadius.circular(15),
       child: InkWell(
-        borderRadius: BorderRadius.circular(50),
+        borderRadius: BorderRadius.circular(15),
         onTap: () {
           //Navigator.pop(context);
         },
@@ -25,7 +25,7 @@ class _ButtonState extends State<Button> {
           decoration: BoxDecoration(
               border: Border.all(color: Colors.white),
               borderRadius:
-              BorderRadius.circular(20)),
+              BorderRadius.circular(15)),
           width: double.infinity,
           child: Center(
             child: Text(

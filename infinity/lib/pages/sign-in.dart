@@ -50,7 +50,7 @@ class _SignInState extends State<SignIn> {
                                 children: <Widget>[
                                   MyTextField(
                                     textController: phone1,
-                                    icon: Icons.email,
+                                    icon: Icons.phone,
                                     name: 'Enter your phone number',
                                     obscure: false,
                                   ),
