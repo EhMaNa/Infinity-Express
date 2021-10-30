@@ -70,7 +70,7 @@ class MyTextField extends StatelessWidget {
             color: Colors.black
         ),
         border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(50)
+            borderRadius: BorderRadius.circular(10)
         ),
         errorBorder: OutlineInputBorder(
             borderRadius:
