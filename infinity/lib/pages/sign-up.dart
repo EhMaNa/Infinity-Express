@@ -37,7 +37,7 @@ class _SignUpState extends State<SignUp> {
                           Expanded(
                             flex: 3,
                             child: Text(
-                              'Welcome to your biggest transport service',
+                              'Welcome to your biggest campus\n  transport service ',
                               style: TextStyle(
                                   fontSize: 23,
                                   fontWeight: FontWeight.bold,
@@ -88,7 +88,7 @@ class _SignUpState extends State<SignUp> {
                               children: [
                                 Button(
                                   textName: 'Register',
-                                  onPress: (){},
+                                  onPress: () {},
                                 ),
                                 SizedBox(
                                   height: 20,
