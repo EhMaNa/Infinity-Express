@@ -25,7 +25,7 @@ class _ButtonState extends State<Button> {
           decoration: BoxDecoration(
               border: Border.all(color: Colors.white),
               borderRadius:
-              BorderRadius.circular(50)),
+              BorderRadius.circular(20)),
           width: double.infinity,
           child: Center(
             child: Text(
