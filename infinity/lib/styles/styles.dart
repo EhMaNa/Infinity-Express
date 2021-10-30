@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class Button extends StatefulWidget {
   final String textName;
-  Button({required this.textName});
+  final Function onPress;
+  Button({required this.textName, required this.onPress});
 
 
   @override
@@ -17,9 +18,7 @@ class _ButtonState extends State<Button> {
       borderRadius: BorderRadius.circular(15),
       child: InkWell(
         borderRadius: BorderRadius.circular(15),
-        onTap: () {
-          //Navigator.pop(context);
-        },
+        onTap: (){},
         child: Container(
           height: 83,
           decoration: BoxDecoration(
