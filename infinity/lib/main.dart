@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:infinity/pages/signin.dart';
 import 'package:infinity/pages/sign-in.dart';
 import 'package:infinity/pages/sign-up.dart';
+
 
 void main() {
   runApp(MyApp());
