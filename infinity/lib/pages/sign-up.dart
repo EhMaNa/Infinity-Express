@@ -116,18 +116,6 @@ class _SignUpState extends State<SignUp> {
                                 SizedBox(
                                   height: 15,
                                 ),
-                                /*Column(
-                                  children: [
-                                    Text(
-                                      'Forgot Password',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w900,
-                                        color: Colors.red,
-                                      ),
-                                    )
-                                  ],
-                                )*/
                                 //Button(textName: 'Cancel',)
                               ],
                             ),
