@@ -9,8 +9,8 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  TextEditingController pass1 = TextEditingController();
-  TextEditingController phone1 = TextEditingController();
+  TextEditingController password = TextEditingController();
+  TextEditingController phone = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -50,14 +50,14 @@ class _SignInState extends State<SignIn> {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: <Widget>[
                                     MyTextField(
-                                      textController: phone1,
+                                      textController: phone,
                                       icon: Icons.phone,
                                       name: 'Enter your phone number',
                                       obscure: false,
                                     ),
                                     SizedBox(height: 25),
                                     MyTextField(
-                                      textController: pass1,
+                                      textController: password,
                                       icon: Icons.lock,
                                       name: 'Enter your password',
                                       obscure: true,
