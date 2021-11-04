@@ -88,7 +88,7 @@ class _SignUpState extends State<SignUp> {
                               children: [
                                 Button(
                                   textName: 'Register',
-                                  onPress: () {},
+                                  onTap: () {},
                                 ),
                                 SizedBox(
                                   height: 20,
@@ -103,14 +103,9 @@ class _SignUpState extends State<SignUp> {
                                     SizedBox(
                                       width: 5,
                                     ),
-                                    Text(
-                                      'Sign In',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.blue,
-                                      ),
-                                    ),
+                                    BlueText(textName: 'Sign In', onTap: () {
+                                      Navigator.pushNamed(context, '/signIn');
+                                    }),
                                   ],
                                 ),
                                 SizedBox(

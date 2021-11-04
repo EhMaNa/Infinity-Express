@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:infinity/pages/sign-in.dart';
+import 'package:infinity/pages/sign-up.dart';
 
 
 void main() {
@@ -12,10 +13,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Infinity Express',
+        initialRoute: '/',
+        routes: {
+          '/': (context) => SignUp(),
+          '/signIn': (context) => SignIn(),
+        },
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: SignIn());
+        );
   }
 }
 

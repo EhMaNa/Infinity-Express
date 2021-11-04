@@ -1,9 +1,30 @@
 import 'package:flutter/material.dart';
 
+class BlueText extends StatelessWidget {
+  final String textName;
+  final Function onTap;
+  BlueText({required this.textName, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap(),
+      child: Text(
+        textName,
+        style: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: Colors.blue,
+        ),
+      ),
+    );
+  }
+}
+
 class Button extends StatefulWidget {
   final String textName;
-  final Function onPress;
-  Button({required this.textName, required this.onPress});
+  final Function onTap;
+  Button({required this.textName, required this.onTap});
 
 
   @override
@@ -18,7 +39,7 @@ class _ButtonState extends State<Button> {
       borderRadius: BorderRadius.circular(15),
       child: InkWell(
         borderRadius: BorderRadius.circular(15),
-        onTap: (){},
+        onTap: widget.onTap(),
         child: Container(
           height: 83,
           decoration: BoxDecoration(

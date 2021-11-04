@@ -21,12 +21,24 @@ class _SignInState extends State<SignIn> {
             Stack(
               children: [
                 SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width,
+                  height: MediaQuery
+                      .of(context)
+                      .size
+                      .height,
                 ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width,
+                  height: MediaQuery
+                      .of(context)
+                      .size
+                      .height,
                   child: SafeArea(
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 35),
@@ -72,7 +84,7 @@ class _SignInState extends State<SignIn> {
                               children: [
                                 Button(
                                   textName: 'Sign In',
-                                  onPress: (){},
+                                  onTap: () {},
                                 ),
                                 SizedBox(
                                   height: 20,
@@ -87,13 +99,11 @@ class _SignInState extends State<SignIn> {
                                     SizedBox(
                                       width: 5,
                                     ),
-                                    Text(
-                                      'Sign Up',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.blue,
-                                      ),
+                                    BlueText(
+                                      textName: 'Sign Up',
+                                      onTap: () {
+                                        Navigator.pushNamed(context, '/');
+                                      },
                                     ),
                                   ],
                                 ),
@@ -112,7 +122,6 @@ class _SignInState extends State<SignIn> {
                                     )
                                   ],
                                 )
-                                //Button(textName: 'Cancel',)
                               ],
                             ),
                           )
@@ -129,3 +138,4 @@ class _SignInState extends State<SignIn> {
     );
   }
 }
+
