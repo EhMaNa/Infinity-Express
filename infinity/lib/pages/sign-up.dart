@@ -17,7 +17,9 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
+        //physics: BouncingScrollPhysics(),
         child: Column(
           children: [
             Stack(
@@ -37,7 +39,7 @@ class _SignUpState extends State<SignUp> {
                           Expanded(
                             flex: 3,
                             child: Text(
-                              'Welcome to your biggest campus\n  transport service ',
+                              '''Welcome to your biggest campus transport service ''',
                               style: TextStyle(
                                   fontSize: 23,
                                   fontWeight: FontWeight.bold,
@@ -47,7 +49,7 @@ class _SignUpState extends State<SignUp> {
                           Form(
                             // key: _formKey,
                             child: Expanded(
-                                flex: 6,
+                                flex: 7,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: <Widget>[
@@ -56,6 +58,7 @@ class _SignUpState extends State<SignUp> {
                                       icon: Icons.person,
                                       name: 'Enter your full name',
                                       obscure: false,
+                                      keyboardType: TextInputType.text,
                                     ),
                                     SizedBox(height: 25),
                                     MyTextField(
@@ -63,6 +66,7 @@ class _SignUpState extends State<SignUp> {
                                       icon: Icons.email,
                                       name: 'Enter your e-mail',
                                       obscure: false,
+                                      keyboardType: TextInputType.emailAddress,
                                     ),
                                     SizedBox(height: 25),
                                     MyTextField(
@@ -70,6 +74,7 @@ class _SignUpState extends State<SignUp> {
                                       icon: Icons.phone,
                                       name: 'Enter your phone number',
                                       obscure: false,
+                                      keyboardType: TextInputType.phone,
                                     ),
                                     SizedBox(height: 25),
                                     MyTextField(
@@ -77,13 +82,15 @@ class _SignUpState extends State<SignUp> {
                                       icon: Icons.lock,
                                       name: 'Enter your password',
                                       obscure: true,
+                                      keyboardType:
+                                          TextInputType.visiblePassword,
                                     ),
-                                    SizedBox(height: 2),
+                                    SizedBox(height: 25),
                                   ],
                                 )),
                           ),
                           Expanded(
-                            flex: 5,
+                            flex: 3,
                             child: Column(
                               children: [
                                 Button(
@@ -91,7 +98,7 @@ class _SignUpState extends State<SignUp> {
                                   onTap: () {},
                                 ),
                                 SizedBox(
-                                  height: 20,
+                                  height: 10,
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -100,17 +107,22 @@ class _SignUpState extends State<SignUp> {
                                       "Already have an account?",
                                       style: TextStyle(fontSize: 18),
                                     ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    BlueText(textName: 'Sign In', onTap: () {
-                                      Navigator.pushNamed(context, '/signIn');
-                                    }),
+                                    TextButton(
+                                        onPressed: () {
+                                          Navigator.pushNamed(
+                                              context, '/signIn');
+                                        },
+                                        child: Text(
+                                          'Sign In',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.blue,
+                                          ),
+                                        )),
                                   ],
                                 ),
-                                SizedBox(
-                                  height: 15,
-                                ),
+
                                 //Button(textName: 'Cancel',)
                               ],
                             ),
