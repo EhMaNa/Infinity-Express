@@ -21,24 +21,12 @@ class _SignInState extends State<SignIn> {
             Stack(
               children: [
                 SizedBox(
-                  width: MediaQuery
-                      .of(context)
-                      .size
-                      .width,
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .height,
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
                 ),
                 SizedBox(
-                  width: MediaQuery
-                      .of(context)
-                      .size
-                      .width,
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .height,
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
                   child: SafeArea(
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 35),
@@ -66,6 +54,7 @@ class _SignInState extends State<SignIn> {
                                       icon: Icons.phone,
                                       name: 'Enter your phone number',
                                       obscure: false,
+                                      keyboardType: TextInputType.phone,
                                     ),
                                     SizedBox(height: 25),
                                     MyTextField(
@@ -73,6 +62,8 @@ class _SignInState extends State<SignIn> {
                                       icon: Icons.lock,
                                       name: 'Enter your password',
                                       obscure: true,
+                                      keyboardType:
+                                          TextInputType.visiblePassword,
                                     ),
                                     SizedBox(height: 2),
                                   ],
@@ -87,28 +78,29 @@ class _SignInState extends State<SignIn> {
                                   onTap: () {},
                                 ),
                                 SizedBox(
-                                  height: 20,
+                                  height: 15,
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      "Don't have an account?",
-                                      style: TextStyle(fontSize: 18),
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    BlueText(
-                                      textName: 'Sign Up',
-                                      onTap: () {
-                                        Navigator.pushNamed(context, '/');
-                                      },
-                                    ),
+                                    Text("Don't have an account?",
+                                        style: TextStyle(fontSize: 18)),
+                                    TextButton(
+                                        onPressed: () {
+                                          Navigator.pushNamed(context, '/');
+                                        },
+                                        child: Text(
+                                          'Sign Up',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.blue,
+                                          ),
+                                        )),
                                   ],
                                 ),
                                 SizedBox(
-                                  height: 15,
+                                  height: 3,
                                 ),
                                 Column(
                                   children: [
@@ -138,4 +130,3 @@ class _SignInState extends State<SignIn> {
     );
   }
 }
-
