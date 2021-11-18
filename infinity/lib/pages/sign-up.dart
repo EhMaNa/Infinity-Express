@@ -28,7 +28,8 @@ class _SignUpState extends State<SignUp> {
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
-                  child: SvgPicture.asset('assets/signup.svg'),
+                  child: SvgPicture.asset('assets/signup.svg',
+                  fit: BoxFit.cover,),
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
@@ -51,14 +52,14 @@ class _SignUpState extends State<SignUp> {
                                       style: TextStyle(
                                           fontSize: 43,
                                           fontWeight: FontWeight.bold,
-                                          color: Colors.black),
+                                          color: Colors.red),
                                     ),
                                     SizedBox(height: 8),
                                     Text(
                                       "Welcome to your biggest campus transport service",
                                       style: TextStyle(
                                         fontSize: 15,
-                                        color: Colors.black,
+                                        color: Colors.red,
                                         letterSpacing: 1.2,
                                       ),
                                     )
