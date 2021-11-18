@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:infinity/styles/styles.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -27,6 +28,7 @@ class _SignUpState extends State<SignUp> {
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
+                  child: SvgPicture.asset('assets/signup.svg'),
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
