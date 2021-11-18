@@ -85,18 +85,10 @@ class _SignInState extends State<SignIn> {
                                   children: [
                                     Text("Don't have an account?",
                                         style: TextStyle(fontSize: 18)),
-                                    TextButton(
-                                        onPressed: () {
-                                          Navigator.pushNamed(context, '/');
-                                        },
-                                        child: Text(
-                                          'Sign Up',
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.blue,
-                                          ),
-                                        )),
+                                    BlueText(textName: 'Sign Up',onTap: () {
+                                      Navigator.pushNamed(
+                                          context, '/');
+                                    },),
                                   ],
                                 ),
                                 SizedBox(
