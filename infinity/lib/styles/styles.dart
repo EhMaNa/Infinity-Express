@@ -2,28 +2,27 @@ import 'package:flutter/material.dart';
 
 class BlueText extends StatelessWidget {
   final String textName;
-  final Function onTap;
+  final Function() onTap;
   BlueText({required this.textName, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: onTap(),
-      child: Text(
-        textName,
-        style: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-          color: Colors.blue,
-        ),
-      ),
-    );
+        onPressed: onTap,
+        child: Text(
+          textName,
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.blue,
+          ),
+        ));
   }
 }
 
 class Button extends StatefulWidget {
   final String textName;
-  final Function onTap;
+  final Function() onTap;
   Button({required this.textName, required this.onTap});
 
   @override
@@ -38,7 +37,7 @@ class _ButtonState extends State<Button> {
       borderRadius: BorderRadius.circular(15),
       child: InkWell(
         borderRadius: BorderRadius.circular(15),
-        onTap: widget.onTap(),
+        onTap: widget.onTap,
         child: Container(
           height: 60,
           decoration: BoxDecoration(
