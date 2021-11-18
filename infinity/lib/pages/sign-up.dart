@@ -37,6 +37,33 @@ class _SignUpState extends State<SignUp> {
                       child: Column(
                         children: [
                           Expanded(
+                              flex: 2,
+                              child: Container(
+                                width: double.infinity,
+
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'SIGN UP',
+                                      style: TextStyle(
+                                          fontSize: 43,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    ),
+                                    SizedBox(height: 8),
+                                    Text(
+                                      "Welcome to your biggest campus transport service",
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.black,
+                                        letterSpacing: 1.2,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )),
+                          /*Expanded(
                             flex: 3,
                             child: Text(
                               '''Welcome to your biggest campus transport service ''',
@@ -45,7 +72,7 @@ class _SignUpState extends State<SignUp> {
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black),
                             ),
-                          ),
+                          ),*/
                           Form(
                             // key: _formKey,
                             child: Expanded(
@@ -60,7 +87,7 @@ class _SignUpState extends State<SignUp> {
                                       obscure: false,
                                       keyboardType: TextInputType.text,
                                     ),
-                                    SizedBox(height: 25),
+                                    SizedBox(height: 15),
                                     MyTextField(
                                       textController: email,
                                       icon: Icons.email,
@@ -68,7 +95,7 @@ class _SignUpState extends State<SignUp> {
                                       obscure: false,
                                       keyboardType: TextInputType.emailAddress,
                                     ),
-                                    SizedBox(height: 25),
+                                    SizedBox(height: 15),
                                     MyTextField(
                                       textController: phone,
                                       icon: Icons.phone,
@@ -76,7 +103,7 @@ class _SignUpState extends State<SignUp> {
                                       obscure: false,
                                       keyboardType: TextInputType.phone,
                                     ),
-                                    SizedBox(height: 25),
+                                    SizedBox(height: 15),
                                     MyTextField(
                                       textController: pass,
                                       icon: Icons.lock,
@@ -85,7 +112,7 @@ class _SignUpState extends State<SignUp> {
                                       keyboardType:
                                           TextInputType.visiblePassword,
                                     ),
-                                    SizedBox(height: 25),
+                                    SizedBox(height: 12),
                                   ],
                                 )),
                           ),
@@ -107,19 +134,10 @@ class _SignUpState extends State<SignUp> {
                                       "Already have an account?",
                                       style: TextStyle(fontSize: 18),
                                     ),
-                                    TextButton(
-                                        onPressed: () {
-                                          Navigator.pushNamed(
-                                              context, '/signIn');
-                                        },
-                                        child: Text(
-                                          'Sign In',
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.blue,
-                                          ),
-                                        )),
+                                    BlueText(textName: 'Sign In',onTap: () {
+                                      Navigator.pushNamed(
+                                          context, '/signIn');
+                                    },),
                                   ],
                                 ),
 
@@ -140,3 +158,5 @@ class _SignUpState extends State<SignUp> {
     );
   }
 }
+
+
