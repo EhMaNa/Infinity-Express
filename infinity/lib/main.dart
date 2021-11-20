@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:infinity/pages/home.dart';
 import 'package:infinity/pages/sign-in.dart';
 import 'package:infinity/pages/sign-up.dart';
 
@@ -13,11 +14,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
         title: 'Infinity Express',
         initialRoute: '/',
         routes: {
-          '/': (context) => SignUp(),
-          '/signIn': (context) => SignIn(),
+          '/': (context) => SignIn(),
+          '/signUP': (context) => SignUp(),
+          '/home': (context) => Home(),
+
         },
         theme: ThemeData(
           primarySwatch: Colors.blue,
