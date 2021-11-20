@@ -1,165 +1,225 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:infinity/styles/styles.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:infinity/pages/sign-in.dart';
 
 class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
-
   @override
   _SignUpState createState() => _SignUpState();
 }
 
 class _SignUpState extends State<SignUp> {
-  TextEditingController pass = TextEditingController();
-  TextEditingController phone = TextEditingController();
-  TextEditingController name = TextEditingController();
-  TextEditingController email = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordcontroller = TextEditingController();
+  TextEditingController _confirmPasswordController = TextEditingController();
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _phoneController = TextEditingController();
+
+  //textfield states
+  String email = '';
+  String password = '';
+  String name = '';
+  String confirmPassword = '';
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-        //physics: BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            Stack(
-              children: [
+      key: _scaffoldKey,
+      body: ListView(physics: BouncingScrollPhysics(), children: <Widget>[
+        SvgPicture.asset(
+          'assets/wrapper.svg',
+          height: 200,
+        ),
+        SizedBox(height: 10),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: <Widget>[
                 SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  child: SvgPicture.asset('assets/signup.svg',
-                  fit: BoxFit.cover,),
+                  height: 20.0,
+                ),
+                //Textfield for name
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: TextFormField(
+                    textCapitalization: TextCapitalization.words,
+                    maxLength: 20,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.person),
+                      hintText: 'Username*',
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black)),
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.red)),
+                      border: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.red)),
+                    ),
+                    controller: _nameController,
+                    /*validator: (value) =>
+                        value.isEmpty ? 'UserName field cannot be empty' : null,
+                    onChanged: (value) {
+                      setState(() => name = value);
+                    },*/
+                  ),
                 ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  child: SafeArea(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 35),
-                      child: Column(
-                        children: [
-                          Expanded(
-                              flex: 2,
-                              child: Container(
-                                width: double.infinity,
-
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'SIGN UP',
-                                      style: TextStyle(
-                                          fontSize: 43,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.red),
-                                    ),
-                                    SizedBox(height: 8),
-                                    Text(
-                                      "Welcome to your biggest campus transport service",
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        color: Colors.red,
-                                        letterSpacing: 1.2,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              )),
-                          /*Expanded(
-                            flex: 3,
-                            child: Text(
-                              '''Welcome to your biggest campus transport service ''',
-                              style: TextStyle(
-                                  fontSize: 23,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black),
-                            ),
-                          ),*/
-                          Form(
-                            // key: _formKey,
-                            child: Expanded(
-                                flex: 7,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: <Widget>[
-                                    MyTextField(
-                                      textController: name,
-                                      icon: Icons.person,
-                                      name: 'Enter your full name',
-                                      obscure: false,
-                                      keyboardType: TextInputType.text,
-                                    ),
-                                    SizedBox(height: 15),
-                                    MyTextField(
-                                      textController: email,
-                                      icon: Icons.email,
-                                      name: 'Enter your e-mail',
-                                      obscure: false,
-                                      keyboardType: TextInputType.emailAddress,
-                                    ),
-                                    SizedBox(height: 15),
-                                    MyTextField(
-                                      textController: phone,
-                                      icon: Icons.phone,
-                                      name: 'Enter your phone number',
-                                      obscure: false,
-                                      keyboardType: TextInputType.phone,
-                                    ),
-                                    SizedBox(height: 15),
-                                    MyTextField(
-                                      textController: pass,
-                                      icon: Icons.lock,
-                                      name: 'Enter your password',
-                                      obscure: true,
-                                      keyboardType:
-                                          TextInputType.visiblePassword,
-                                    ),
-                                    SizedBox(height: 12),
-                                  ],
-                                )),
-                          ),
-                          Expanded(
-                            flex: 3,
-                            child: Column(
-                              children: [
-                                Button(
-                                  textName: 'Register',
-                                  onTap: () {},
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "Already have an account?",
-                                      style: TextStyle(fontSize: 18),
-                                    ),
-                                    BlueText(textName: 'Sign In',onTap: () {
-                                      Navigator.pushNamed(
-                                          context, '/signIn');
-                                    },),
-                                  ],
-                                ),
-
-                                //Button(textName: 'Cancel',)
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
+                  height: 20.0,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.phone_android_outlined),
+                      hintText: 'Phone Number*',
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black)),
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.red)),
+                      border: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.red)),
                     ),
+                    controller: _phoneController,
+                    keyboardType: TextInputType.phone,
+                    //validator: (value) =>
+                    //  value.isEmpty ? 'Enter a valid email' : null,
+                    //onChanged: (value) {
+                    //  setState(() => email = value);
+                    //},
                   ),
-                )
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.mail),
+                      hintText: 'Please provide a valid Email*',
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black)),
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.red)),
+                      border: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.red)),
+                    ),
+                    controller: _emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    /*  validator: (value) =>
+                        value.isEmpty ? 'Enter a valid email' : null,
+                    onChanged: (value) {
+                      setState(() => email = value);
+                    },*/
+                  ),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                //TextField for password
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.lock),
+                      hintText: 'Password*',
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black)),
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.red)),
+                      border: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.red)),
+                    ),
+                    obscureText: true,
+                    controller: _passwordcontroller,
+                    /*validator: (value) => value.length < 6
+                        ? 'Password should contain more than 6 Characters'
+                        : null,
+                    onChanged: (value) {
+                      setState(() => password = value);
+                    },*/
+                  ),
+                ),
+
+                SizedBox(
+                  height: 20,
+                ),
+                //textfied for confirming passowrd
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.lock),
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black)),
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.red)),
+                      hintText: 'ConfirmPassword*',
+                      border: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.red)),
+                    ),
+                    obscureText: true,
+                    controller: _confirmPasswordController,
+                    validator: (value) => value != password
+                        ? ' Characters should match Password characters'
+                        : null,
+                    onChanged: (value) {
+                      setState(() => confirmPassword = value);
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                SizedBox(height: 30),
+
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: OutlinedButton(
+                    child: Container(
+                        width: 200,
+                        height: 50,
+                        child: Center(
+                            child: Text('Sign Up ',
+                                style: TextStyle(
+                                    fontSize: 17.0,
+                                    fontWeight: FontWeight.w600)))),
+                    style: OutlinedButton.styleFrom(
+                        backgroundColor: Colors.transparent,
+                        primary: Colors.red,
+                        side: BorderSide(
+                          color: Colors.red,
+                        ),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10))),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/home');
+                    },
+                  ),
+                ),
+
+                SizedBox(
+                  height: 25,
+                ),
+                TextButton(
+                  onPressed: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SignIn())),
+                  child: Text("Already Have an Account? Sign in",
+                      style: TextStyle(color: Colors.red)),
+                ),
               ],
             ),
-          ],
+          ),
         ),
-      ),
+      ]),
     );
   }
 }
-
-
