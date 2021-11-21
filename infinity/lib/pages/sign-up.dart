@@ -55,7 +55,7 @@ class _SignUpState extends State<SignUp> {
                     maxLength: 20,
                     decoration: InputDecoration(
                       prefixIcon: Icon(Icons.person),
-                      hintText: 'Username*',
+                      hintText: 'Username',
                       enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.black)),
                       focusedBorder: UnderlineInputBorder(
@@ -79,7 +79,7 @@ class _SignUpState extends State<SignUp> {
                   child: TextFormField(
                     decoration: InputDecoration(
                       prefixIcon: Icon(Icons.phone_android_outlined),
-                      hintText: 'Phone Number*',
+                      hintText: 'Phone Number',
                       enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.black)),
                       focusedBorder: UnderlineInputBorder(
@@ -104,7 +104,7 @@ class _SignUpState extends State<SignUp> {
                   child: TextFormField(
                     decoration: InputDecoration(
                       prefixIcon: Icon(Icons.mail),
-                      hintText: 'Please provide a valid Email*',
+                      hintText: 'Please provide a valid Email',
                       enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.black)),
                       focusedBorder: UnderlineInputBorder(
@@ -130,7 +130,7 @@ class _SignUpState extends State<SignUp> {
                   child: TextFormField(
                     decoration: InputDecoration(
                       prefixIcon: Icon(Icons.lock),
-                      hintText: 'Password*',
+                      hintText: 'Password',
                       enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.black)),
                       focusedBorder: UnderlineInputBorder(
@@ -162,7 +162,7 @@ class _SignUpState extends State<SignUp> {
                           borderSide: BorderSide(color: Colors.black)),
                       focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.red)),
-                      hintText: 'ConfirmPassword*',
+                      hintText: 'Confirm Password',
                       border: UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.red)),
                     ),
