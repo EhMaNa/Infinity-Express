@@ -76,6 +76,12 @@ class _HomeState extends State<Home> {
                     icon: Icon(CupertinoIcons.tickets),
                     onPressed: () => onPageChanged(2),
                   ),
+                  IconButton(
+                    color: pageIndex == 3 ? kRed : Colors.grey,
+                    icon: Icon(CupertinoIcons.info_circle),
+                    onPressed: () => onPageChanged(2),
+                  ),
+                  
                 ],
               ),
             ),
