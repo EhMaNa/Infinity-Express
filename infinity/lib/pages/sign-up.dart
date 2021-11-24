@@ -54,8 +54,7 @@ class _SignUpState extends State<SignUp> {
                     textCapitalization: TextCapitalization.words,
                     maxLength: 20,
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.person),
-                      hintText: 'Username*',
+                      hintText: 'Username',
                       enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.black)),
                       focusedBorder: UnderlineInputBorder(
@@ -78,8 +77,7 @@ class _SignUpState extends State<SignUp> {
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: TextFormField(
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.phone_android_outlined),
-                      hintText: 'Phone Number*',
+                      hintText: 'Phone Number',
                       enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.black)),
                       focusedBorder: UnderlineInputBorder(
@@ -103,8 +101,7 @@ class _SignUpState extends State<SignUp> {
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: TextFormField(
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.mail),
-                      hintText: 'Please provide a valid Email*',
+                      hintText: 'Please provide a valid Email',
                       enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.black)),
                       focusedBorder: UnderlineInputBorder(
@@ -129,8 +126,7 @@ class _SignUpState extends State<SignUp> {
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: TextFormField(
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.lock),
-                      hintText: 'Password*',
+                      hintText: 'Password',
                       enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.black)),
                       focusedBorder: UnderlineInputBorder(
@@ -157,12 +153,11 @@ class _SignUpState extends State<SignUp> {
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: TextFormField(
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.lock),
                       enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.black)),
                       focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.red)),
-                      hintText: 'ConfirmPassword*',
+                      hintText: 'ConfirmPassword',
                       border: UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.red)),
                     ),
