@@ -1,18 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:infinity/pages/sign-up.dart';
+import 'package:select_form_field/select_form_field.dart';
 
-class SignIn extends StatefulWidget {
+class Destination extends StatefulWidget {
   @override
-  _SignInState createState() => _SignInState();
+  _DestinationState createState() => _DestinationState();
 }
 
-class _SignInState extends State<SignIn> {
+class _DestinationState extends State<Destination> {
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  TextEditingController _phoneController = TextEditingController();
-  TextEditingController _passwordcontroller = TextEditingController();
+  //TextEditingController _phoneController = TextEditingController();
+  TextEditingController _location = TextEditingController();
 
   bool loading = false;
 
@@ -20,6 +20,22 @@ class _SignInState extends State<SignIn> {
   String email = '';
   String password = '';
   String error = '';
+  final List<Map<String, dynamic>> _items = [
+    {
+      'value': 'Kumasi',
+      'label': 'Kumasi',
+    },
+    {
+      'value': 'circleValue',
+      'label': 'Circle Label',
+      'icon': Icon(Icons.fiber_manual_record),
+      'textStyle': TextStyle(color: Colors.red),
+    },
+    {
+      'value': 'Sunyani',
+      'label': 'Sunyani',
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +45,7 @@ class _SignInState extends State<SignIn> {
         physics: BouncingScrollPhysics(),
         children: <Widget>[
           SvgPicture.asset(
-            'assets/signin.svg',
+            'assets/destination.svg',
             height: 250,
           ),
           SizedBox(height: 10),
@@ -45,25 +61,14 @@ class _SignInState extends State<SignIn> {
                   //Textfield for email
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.phone_android_outlined),
-                        hintText: 'Phone Number',
-                        enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black)),
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.red)),
-                        border: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.red)),
-                        focusColor: Colors.red,
-                      ),
-                      controller: _phoneController,
-                      keyboardType: TextInputType.phone,
-                      //validator: (value) =>
-                      //value.isEmpty ? 'Enter a valid email' : null,
-                      /*onChanged: (value) {
-                        setState(() => email = value);
-                      },*/
+                    child: SelectFormField(
+                      type: SelectFormFieldType.dropdown, // or can be dialog
+                      //initialValue: 'Kumasi',
+                      icon: Icon(Icons.place),
+                      labelText: 'Choose Destination',
+                      items: _items,
+                      onChanged: (val) => print(val),
+                      onSaved: (val) => print(val),
                     ),
                   ),
                   SizedBox(
@@ -75,7 +80,7 @@ class _SignInState extends State<SignIn> {
                     child: TextFormField(
                       decoration: InputDecoration(
                         prefixIcon: Icon(Icons.security),
-                        hintText: 'Password',
+                        hintText: 'Departure Date',
                         enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.black)),
                         focusedBorder: UnderlineInputBorder(
@@ -84,13 +89,8 @@ class _SignInState extends State<SignIn> {
                             borderSide: BorderSide(color: Colors.red)),
                         focusColor: Colors.red,
                       ),
-                      obscureText: true,
-                      controller: _passwordcontroller,
-                      /*validator: (value) =>
-                          value.length < 6 ? 'Incorrect password' : null,
-                      onChanged: (value) {
-                        setState(() => password = value);
-                      },*/
+                      obscureText: false,
+                      controller: _location,
                     ),
                   ),
                   SizedBox(height: 30),
@@ -102,7 +102,7 @@ class _SignInState extends State<SignIn> {
                             width: 200,
                             height: 50,
                             child: Center(
-                                child: Text('Sign In ',
+                                child: Text('Continue ',
                                     style: TextStyle(
                                         fontSize: 17.0,
                                         fontWeight: FontWeight.w600)))),
@@ -118,27 +118,6 @@ class _SignInState extends State<SignIn> {
                           Navigator.pushNamed(context, '/home');
                         }),
                   ),
-
-                  SizedBox(
-                    height: 15,
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      
-                    },
-                    child: Text(
-                      "Forgot Password?",
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextButton(
-                    onPressed: () => Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SignUp())),
-                    child: Text("Don't Have an Account? SignUp",
-                        style: TextStyle(color: Colors.red)),
-                  )
                 ],
               ),
             ),
