@@ -48,7 +48,7 @@ class _SignInState extends State<SignIn> {
                     child: TextFormField(
                       decoration: InputDecoration(
                         prefixIcon: Icon(Icons.phone_android_outlined),
-                        hintText: 'Phone Number*',
+                        hintText: 'Phone Number',
                         enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.black)),
                         focusedBorder: UnderlineInputBorder(
@@ -75,7 +75,7 @@ class _SignInState extends State<SignIn> {
                     child: TextFormField(
                       decoration: InputDecoration(
                         prefixIcon: Icon(Icons.security),
-                        hintText: 'Password*',
+                        hintText: 'Password',
                         enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.black)),
                         focusedBorder: UnderlineInputBorder(
