@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: 0.23.0
+  flutter_dropdown: ^1.0.0+hotfix.1
   select_form_field: ^2.2.0
 
 
