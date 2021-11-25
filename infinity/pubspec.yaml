@@ -26,6 +26,7 @@ dependencies:
   flutter_svg: 0.23.0
   flutter_dropdown: ^1.0.0+hotfix.1
   select_form_field: ^2.2.0
+  carousel_slider: ^4.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
