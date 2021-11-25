@@ -15,12 +15,6 @@ class _DestinationState extends State<Destination> {
   //TextEditingController _phoneController = TextEditingController();
   TextEditingController _location = TextEditingController();
 
-  bool loading = false;
-
-  //textfield states
-  String email = '';
-  String password = '';
-  String error = '';
   final List<Map<String, dynamic>> _locations = [
     {
       'value': 'Kumasi',
@@ -30,6 +24,17 @@ class _DestinationState extends State<Destination> {
     {
       'value': 'Sunyani',
       'label': 'Sunyani',
+    },
+  ];
+  final List<Map<String, dynamic>> _pickup = [
+    {
+      'value': 'Diaspora',
+      'label': 'Diaspora',
+    },
+
+    {
+      'value': 'Athletic Oval',
+      'label': 'Athletic Oval',
     },
   ];
   final List<Map<String, dynamic>> value = [
@@ -75,7 +80,20 @@ class _DestinationState extends State<Destination> {
                   SizedBox(
                     height: 20.0,
                   ),
-                  //Textfield for email
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: SelectFormField(
+                      type: SelectFormFieldType.dropdown, // or can be dialog
+                      icon: Icon(Icons.place),
+                      labelText: 'Select Pickup Point',
+                      items: _pickup,
+                      onChanged: (val) => print(val),
+                      onSaved: (val) => print(val),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: SelectFormField(
