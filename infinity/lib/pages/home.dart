@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:infinity/pages/booking.dart';
+import 'package:infinity/pages/destination.dart';
 import 'package:infinity/pages/tickets.dart';
 import 'package:infinity/pages/timeline.dart';
 
@@ -19,7 +19,7 @@ class _HomeState extends State<Home> {
   late PageController _pageController;
   final List<Widget> _pages = [
     Timeline(),
-    Booking(),
+    Destination(),
     Tickets(),
   ];
 
