@@ -13,14 +13,13 @@ class _DestinationState extends State<Destination> {
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   //TextEditingController _phoneController = TextEditingController();
-  TextEditingController _location = TextEditingController();
+  TextEditingController date = TextEditingController();
 
   final List<Map<String, dynamic>> _locations = [
     {
       'value': 'Kumasi',
       'label': 'Kumasi',
     },
-    
     {
       'value': 'Sunyani',
       'label': 'Sunyani',
@@ -31,7 +30,6 @@ class _DestinationState extends State<Destination> {
       'value': 'Diaspora',
       'label': 'Diaspora',
     },
-
     {
       'value': 'Athletic Oval',
       'label': 'Athletic Oval',
@@ -42,7 +40,6 @@ class _DestinationState extends State<Destination> {
       'value': 'Yes',
       'label': 'Yes',
     },
-    
     {
       'value': 'No',
       'label': 'No',
@@ -57,10 +54,15 @@ class _DestinationState extends State<Destination> {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-      actions: [
-        TextButton(onPressed: () =>Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Booking())), child: Text("Next", style: TextStyle(color: Colors.red, fontSize: 20),))
-      ],
+        actions: [
+          TextButton(
+              onPressed: () => Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Booking())),
+              child: Text(
+                "Next",
+                style: TextStyle(color: Colors.red, fontSize: 20),
+              ))
+        ],
       ),
       body: ListView(
         physics: BouncingScrollPhysics(),
@@ -84,7 +86,7 @@ class _DestinationState extends State<Destination> {
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: SelectFormField(
                       type: SelectFormFieldType.dropdown, // or can be dialog
-                      icon: Icon(Icons.place),
+                      icon: Icon(Icons.location_on_outlined),
                       labelText: 'Select Pickup Point',
                       items: _pickup,
                       onChanged: (val) => print(val),
@@ -99,7 +101,7 @@ class _DestinationState extends State<Destination> {
                     child: SelectFormField(
                       type: SelectFormFieldType.dialog, // or can be dialog
                       //initialValue: 'Kumasi',
-                      icon: Icon(Icons.place),
+                      icon: Icon(Icons.location_city_outlined),
                       labelText: 'Choose Destination',
                       items: _locations,
                       onChanged: (val) => print(val),
@@ -110,25 +112,27 @@ class _DestinationState extends State<Destination> {
                     height: 20.0,
                   ),
                   //TextField for password
-                  
+
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 0.0),
                     child: SelectFormField(
                       type: SelectFormFieldType.dropdown, // or can be dialog
                       //initialValue: 'Kumasi',
-                      icon: Icon(Icons.no_luggage_outlined),
+                      icon: Icon(Icons.luggage_outlined),
                       labelText: 'Do you have lagguage?',
                       items: value,
                       onChanged: (val) => print(val),
                       onSaved: (val) => print(val),
                     ),
                   ),
-                  SizedBox(height:20 ,),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0),
                     child: TextFormField(
                       decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.calendar_view_month_rounded),
+                        prefixIcon: Icon(Icons.date_range_outlined),
                         hintText: 'Departure Date',
                         enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.black)),
@@ -139,12 +143,10 @@ class _DestinationState extends State<Destination> {
                         focusColor: Colors.red,
                       ),
                       obscureText: false,
-                      controller: _location,
+                      controller: date,
                     ),
                   ),
                   SizedBox(height: 30),
-
-                  
                 ],
               ),
             ),
