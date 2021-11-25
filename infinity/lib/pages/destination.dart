@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:infinity/pages/booking.dart';
 import 'package:select_form_field/select_form_field.dart';
 
 class Destination extends StatefulWidget {
@@ -20,20 +21,26 @@ class _DestinationState extends State<Destination> {
   String email = '';
   String password = '';
   String error = '';
-  final List<Map<String, dynamic>> _items = [
+  final List<Map<String, dynamic>> _locations = [
     {
       'value': 'Kumasi',
       'label': 'Kumasi',
     },
-    {
-      'value': 'circleValue',
-      'label': 'Circle Label',
-      'icon': Icon(Icons.fiber_manual_record),
-      'textStyle': TextStyle(color: Colors.red),
-    },
+    
     {
       'value': 'Sunyani',
       'label': 'Sunyani',
+    },
+  ];
+  final List<Map<String, dynamic>> value = [
+    {
+      'value': 'Yes',
+      'label': 'Yes',
+    },
+    
+    {
+      'value': 'No',
+      'label': 'No',
     },
   ];
 
@@ -41,16 +48,26 @@ class _DestinationState extends State<Destination> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+      actions: [
+        TextButton(onPressed: () =>Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Booking())), child: Text("Next", style: TextStyle(color: Colors.red, fontSize: 20),))
+      ],
+      ),
       body: ListView(
         physics: BouncingScrollPhysics(),
         children: <Widget>[
+          Padding(padding: EdgeInsets.only(top: 20)),
           SvgPicture.asset(
             'assets/destination.svg',
             height: 250,
           ),
           SizedBox(height: 10),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Form(
               key: _formKey,
               child: Column(
@@ -60,13 +77,13 @@ class _DestinationState extends State<Destination> {
                   ),
                   //Textfield for email
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: SelectFormField(
-                      type: SelectFormFieldType.dropdown, // or can be dialog
+                      type: SelectFormFieldType.dialog, // or can be dialog
                       //initialValue: 'Kumasi',
                       icon: Icon(Icons.place),
                       labelText: 'Choose Destination',
-                      items: _items,
+                      items: _locations,
                       onChanged: (val) => print(val),
                       onSaved: (val) => print(val),
                     ),
@@ -75,11 +92,25 @@ class _DestinationState extends State<Destination> {
                     height: 20.0,
                   ),
                   //TextField for password
+                  
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                    child: SelectFormField(
+                      type: SelectFormFieldType.dropdown, // or can be dialog
+                      //initialValue: 'Kumasi',
+                      icon: Icon(Icons.no_luggage_outlined),
+                      labelText: 'Do you have lagguage?',
+                      items: value,
+                      onChanged: (val) => print(val),
+                      onSaved: (val) => print(val),
+                    ),
+                  ),
+                  SizedBox(height:20 ,),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10.0),
                     child: TextFormField(
                       decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.security),
+                        prefixIcon: Icon(Icons.calendar_view_month_rounded),
                         hintText: 'Departure Date',
                         enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.black)),
@@ -95,29 +126,7 @@ class _DestinationState extends State<Destination> {
                   ),
                   SizedBox(height: 30),
 
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: OutlinedButton(
-                        child: Container(
-                            width: 200,
-                            height: 50,
-                            child: Center(
-                                child: Text('Continue ',
-                                    style: TextStyle(
-                                        fontSize: 17.0,
-                                        fontWeight: FontWeight.w600)))),
-                        style: OutlinedButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            primary: Colors.red,
-                            side: BorderSide(
-                              color: Colors.red,
-                            ),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/home');
-                        }),
-                  ),
+                  
                 ],
               ),
             ),
