@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class Booking extends StatefulWidget {
-  const Booking({ Key? key }) : super(key: key);
+  const Booking({Key? key}) : super(key: key);
 
   @override
   _BookingState createState() => _BookingState();
@@ -14,36 +14,30 @@ class _BookingState extends State<Booking> {
     return DefaultTabController(
       length: 1,
       child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(70),
-          child: AppBar(
-            title: Text('Choose a Seat',
-            style: TextStyle(
-                color: Colors.black,
-              letterSpacing: 2.0
-            ),),
-            centerTitle: false,
-            backgroundColor: Colors.white,
-            elevation: 0.0,
-            automaticallyImplyLeading: false,
-            ),
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          title: Text(
+            'Choose Seat(s)',
+            style: TextStyle(color: Colors.black, fontSize: 20),
+          ),
+          centerTitle: true,
+          elevation: 0.0,
         ),
-
         body: Container(
           child: Center(
             child: TabBarView(
               children: [
                 ListView(
+                  padding:
+                      EdgeInsets.only(left: 30, right: 50, top: 20, bottom: 40),
                   physics: BouncingScrollPhysics(),
                   children: [
-
                     Row(
                       children: [
                         SeatWidget(name: '1', color: Colors.red),
                         SeatWidget(name: '2', color: Colors.red),
                         Spacer(),
                         SeatWidget(name: '3', color: Colors.red),
-                        SeatWidget1(),
                       ],
                     ),
                     Row(
@@ -52,8 +46,6 @@ class _BookingState extends State<Booking> {
                         SeatWidget(name: '5', color: Colors.red),
                         Spacer(),
                         SeatWidget(name: '6', color: Colors.red),
-                        SeatWidget1(),
-
                       ],
                     ),
                     Row(
@@ -62,8 +54,6 @@ class _BookingState extends State<Booking> {
                         SeatWidget(name: '8', color: Colors.red),
                         Spacer(),
                         SeatWidget(name: '9', color: Colors.red),
-                        SeatWidget1(),
-
                       ],
                     ),
                     Row(
@@ -72,7 +62,6 @@ class _BookingState extends State<Booking> {
                         SeatWidget(name: '11', color: Colors.red),
                         Spacer(),
                         SeatWidget(name: '12', color: Colors.red),
-                        SeatWidget1(),
                       ],
                     ),
                     Row(
@@ -81,7 +70,6 @@ class _BookingState extends State<Booking> {
                         SeatWidget(name: '14', color: Colors.red),
                         Spacer(),
                         SeatWidget(name: '15', color: Colors.red),
-                        SeatWidget1(),
                       ],
                     ),
                     Row(
@@ -90,7 +78,6 @@ class _BookingState extends State<Booking> {
                         SeatWidget(name: '17', color: Colors.red),
                         Spacer(),
                         SeatWidget(name: '18', color: Colors.red),
-                        SeatWidget1(),
                       ],
                     ),
                     Row(
@@ -99,7 +86,6 @@ class _BookingState extends State<Booking> {
                         SeatWidget(name: '20', color: Colors.red),
                         Spacer(),
                         SeatWidget(name: '21', color: Colors.red),
-                        SeatWidget1(),
                       ],
                     ),
                     Row(
@@ -108,7 +94,6 @@ class _BookingState extends State<Booking> {
                         SeatWidget(name: '23', color: Colors.red),
                         Spacer(),
                         SeatWidget(name: '24', color: Colors.red),
-                        SeatWidget1(),
                       ],
                     ),
                     Row(
@@ -117,7 +102,6 @@ class _BookingState extends State<Booking> {
                         SeatWidget(name: '26', color: Colors.red),
                         Spacer(),
                         SeatWidget(name: '27', color: Colors.red),
-                        SeatWidget1(),
                       ],
                     ),
                     Row(
@@ -126,8 +110,6 @@ class _BookingState extends State<Booking> {
                         SeatWidget(name: '29', color: Colors.red),
                         Spacer(),
                         SeatWidget(name: '30', color: Colors.red),
-                        SeatWidget1(),
-
                       ],
                     ),
                     Row(
@@ -136,8 +118,6 @@ class _BookingState extends State<Booking> {
                         SeatWidget(name: '32', color: Colors.red),
                         Spacer(),
                         SeatWidget(name: '33', color: Colors.red),
-                        SeatWidget1(),
-
                       ],
                     ),
                     Row(
@@ -146,8 +126,6 @@ class _BookingState extends State<Booking> {
                         SeatWidget(name: '35', color: Colors.red),
                         Spacer(),
                         SeatWidget(name: '36', color: Colors.red),
-                        SeatWidget1(),
-
                       ],
                     ),
                     Row(
@@ -156,31 +134,27 @@ class _BookingState extends State<Booking> {
                         SeatWidget(name: '38', color: Colors.red),
                         SeatWidget(name: '39', color: Colors.red),
                         SeatWidget(name: '40', color: Colors.red),
-
                       ],
                     ),
                   ],
                 ),
-               /* Container(
+                /* Container(
                   child: Center(child: Text('Available')),
                 ),*/
               ],
             ),
           ),
         ),
-
-
       ),
     );
   }
 }
 
 class SeatWidget extends StatefulWidget {
-  String? name;
+  final String? name;
   Color? color;
 
-
-   SeatWidget({this.name, this.color});
+  SeatWidget({this.name, this.color});
 
   @override
   _SeatWidgetState createState() => _SeatWidgetState();
@@ -189,52 +163,18 @@ class SeatWidget extends StatefulWidget {
 class _SeatWidgetState extends State<SeatWidget> {
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width / 5 - 4;
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         setState(() {
-          widget.color = widget.color == Colors.red ? Colors.yellow : Colors.red;
+          widget.color =
+              widget.color == Colors.red ? Colors.yellow : Colors.red;
         });
       },
-      child: Container(
-        margin: EdgeInsets.all(2.0),
-        width: width,
-        height: width / 1.5,
+      child: Icon(
+        Icons.chair,
         color: widget.color,
-        child: Center(
-            child: Text(widget.name.toString(),
-                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold,
-                color: Colors.white))),
+        size: 80,
       ),
     );
   }
 }
-
-class SeatWidget1 extends StatefulWidget {
-  final String? name;
-  final Color? color;
-
-
-  SeatWidget1({this.name = "", this.color=Colors.transparent});
-
-  @override
-  _SeatWidget1State createState() => _SeatWidget1State();
-}
-
-class _SeatWidget1State extends State<SeatWidget1> {
-  @override
-  Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width / 5 - 4;
-    return Container(
-      margin: EdgeInsets.all(2.0),
-      width: width,
-      height: width / 1.5,
-      color: widget.color,
-      child: Center(
-          child: Text(widget.name.toString(),
-              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold,
-                  color: Colors.white))),
-    );
-  }
-}
-
