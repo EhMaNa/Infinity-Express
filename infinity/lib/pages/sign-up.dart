@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:infinity/pages/sign-in.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -9,6 +12,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  final auth = FirebaseAuth.instance;
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController _emailController = TextEditingController();
@@ -63,11 +67,11 @@ class _SignUpState extends State<SignUp> {
                           borderSide: BorderSide(color: Colors.red)),
                     ),
                     controller: _nameController,
-                    /*validator: (value) =>
-                        value.isEmpty ? 'UserName field cannot be empty' : null,
+                    validator: (value) =>
+                        value!.isEmpty ? 'UserName field cannot be empty' : null,
                     onChanged: (value) {
                       setState(() => name = value);
-                    },*/
+                    },
                   ),
                 ),
                 SizedBox(
@@ -87,11 +91,11 @@ class _SignUpState extends State<SignUp> {
                     ),
                     controller: _phoneController,
                     keyboardType: TextInputType.phone,
-                    //validator: (value) =>
-                    //  value.isEmpty ? 'Enter a valid email' : null,
-                    //onChanged: (value) {
-                    //  setState(() => email = value);
-                    //},
+                    validator: (value) =>
+                      value!.isEmpty ? 'Enter a valid email' : null,
+                    onChanged: (value) {
+                      setState(() => email = value);
+                    },
                   ),
                 ),
                 SizedBox(
@@ -136,12 +140,12 @@ class _SignUpState extends State<SignUp> {
                     ),
                     obscureText: true,
                     controller: _passwordcontroller,
-                    /*validator: (value) => value.length < 6
+                    validator: (value) => value!.length < 6
                         ? 'Password should contain more than 6 Characters'
                         : null,
                     onChanged: (value) {
                       setState(() => password = value);
-                    },*/
+                    },
                   ),
                 ),
 
@@ -151,6 +155,7 @@ class _SignUpState extends State<SignUp> {
                 //textfied for confirming passowrd
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+
                   child: TextFormField(
                     decoration: InputDecoration(
                       enabledBorder: UnderlineInputBorder(
@@ -195,8 +200,21 @@ class _SignUpState extends State<SignUp> {
                         ),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10))),
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/home');
+                    onPressed: () async {
+                      //Navigator.pushNamed(context, '/home');
+                      try {
+                        await Firebase.initializeApp();
+                        final newUser = await auth.createUserWithEmailAndPassword(email: _emailController.text, password: _passwordcontroller.text);
+                        await FirebaseFirestore.instance.collection('users').add({
+                          'email': _emailController.text,
+                          'name': _nameController.text,
+                          'phone': _phoneController.text,
+                        });
+                        Navigator.pushNamed(context, '/home');
+                      } catch(e)
+                      {
+                        print(e);
+                      }
                     },
                   ),
                 ),
