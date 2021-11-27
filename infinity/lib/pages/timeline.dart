@@ -1,4 +1,9 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:gradient_widgets/gradient_widgets.dart';
+import 'package:infinity/widgets/book_with_infinity.dart';
+import 'package:path_parsing/path_parsing.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 class Timeline extends StatefulWidget {
@@ -7,82 +12,146 @@ class Timeline extends StatefulWidget {
 }
 
 class _Timeline extends State<Timeline> {
-   List<String> imgList = [
-    'assets/images/infinity1.jpg',
-     'assets/images/infinity2.jpg',
-    'assets/images/infinity3.jpg',
-     'assets/images/infinity5.jpg',
-     'assets/images/infinity7.jpg',
-     'assets/images/infinity4.jpg',
-     'assets/images/infinity6.jpg'
+  List imgList = [
+    'assets/infinity1.jpg',
+    'assets/infinity2.jpg',
+    'assets/infinity3.jpg',
+    'assets/infinity5.jpg',
+    'assets/infinity7.jpg',
+    'assets/infinity8.jpg',
+    'assets/infinity4.jpg',
+    'assets/infinity6.jpg'
   ];
 
-   late List<Widget> imageSliders = imgList
+  late List<Widget> imageSliders = imgList
       .map((item) => Container(
-    child: Container(
-      margin: EdgeInsets.all(5.0),
-      child: ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(5.0)),
-          child: Stack(
-            children: <Widget>[
-              Image.network(item, fit: BoxFit.cover, width: 1000.0),
-              Positioned(
-                bottom: 0.0,
-                left: 0.0,
-                right: 0.0,
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Color.fromARGB(200, 0, 0, 0),
-                        Color.fromARGB(0, 0, 0, 0)
-                      ],
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                    ),
-                  ),
-                  padding: EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 20.0),
-                ),
-              ),
-            ],
-          )),
-    ),
-  ))
+            child: Container(
+              margin: EdgeInsets.all(5.0),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  child: Stack(
+                    children: <Widget>[
+                      Image.asset(
+                        item,
+                        fit: BoxFit.fitHeight,
+                      ),
+                      Positioned(
+                        bottom: 0.0,
+                        left: 0.0,
+                        right: 0.0,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 10.0),
+                        ),
+                      ),
+                    ],
+                  )),
+            ),
+          ))
       .toList();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          CarouselSlider(
-            options: CarouselOptions(
-                height: 400.0,
-            autoPlay: true,
-            enlargeCenterPage: true),
-            items: imageSliders,
-          ),
-          /*FractionallySizedBox(
-            alignment: Alignment.topCenter,
-            heightFactor: 0.7,
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/infinity1.jpg', ),
-                  fit: BoxFit.cover,
+      body: Stack(fit: StackFit.expand, children: [
+        _buildBackground(context),
+        new Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(top: 80, right: 200),
+              child: Container(
+                child: Text(
+                  'Hello, StudentName!',
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
             ),
-          ),*/
-         /* FractionallySizedBox(
-            alignment: Alignment.bottomCenter,
-            heightFactor: 0.3,
-            child: Container(
-              color: Colors.white,
+            Container(
+                padding: EdgeInsets.only(top: 20),
+                child: AnimatedTextKit(repeatForever: true, animatedTexts: [
+                  WavyAnimatedText(
+                    "Welcome To Infinty Transport",
+                    textAlign: TextAlign.center,
+                    textStyle: TextStyle(fontSize: 20
+                    )
+                  )
+                ])),
+            Padding(
+              padding: EdgeInsets.only(top: 30),
+              child: CarouselSlider(
+                options: CarouselOptions(
+                    height: 400.0,
+                    autoPlay: true,
+                    enlargeCenterPage: true,
+                    autoPlayAnimationDuration: Duration(seconds: 2)),
+                items: imageSliders,
+              ),
             ),
-          ),*/
-        ],
-      ),
+            BookWithUs()
+          ],
+        ),
+      ]),
     );
+  }
+
+  Widget _buildBackground(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    String halpEllipsePath =
+        'M-48.35,33.095C-21.509,2.145 17.176,-16.352 59.126,-14.058C134.541,-9.932 192.134,59.835 187.659,141.645C183.184,223.454 118.325,286.524 42.91,282.398C6.777,280.422 -25.266,263.376 -48.35,237.156L-48.35,33.095Z';
+
+    var pathPrinter = new PathBuilder();
+    writeSvgPathDataToPath(halpEllipsePath, pathPrinter);
+    var paint = new Paint()
+      ..strokeWidth = 45.0
+      ..shader = Gradients.aliHussien
+          .createShader(Rect.fromLTWH(0.0, 0.0, 100.0, 300.0))
+      ..style = PaintingStyle.stroke;
+
+    return Transform.scale(
+        scale: 1.75,
+        child: Transform.translate(
+            offset: Offset(width / 6, height / 4),
+            child: CustomPaint(
+                painter:
+                    new PathPainter(p: pathPrinter.path, redPainter: paint))));
+  }
+}
+
+class PathPainter extends CustomPainter {
+  final Path p;
+
+  final Paint redPainter;
+
+  const PathPainter({required this.p, required this.redPainter});
+
+  @override
+  bool shouldRepaint(PathPainter old) => true;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    canvas.drawPath(p, redPainter);
+  }
+}
+
+class PathBuilder extends PathProxy {
+  var path = Path();
+  @override
+  void close() {
+    path.close();
+  }
+
+  @override
+  void cubicTo(
+      double x1, double y1, double x2, double y2, double x3, double y3) {
+    path.cubicTo(x1, y1, x2, y2, x3, y3);
+  }
+
+  @override
+  void lineTo(double x, double y) {
+    path.lineTo(x, y);
+  }
+
+  @override
+  void moveTo(double x, double y) {
+    path.moveTo(x, y);
   }
 }
