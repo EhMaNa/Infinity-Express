@@ -54,6 +54,7 @@ class _DestinationState extends State<Destination> {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0.0,
+        title: Text('Provide Details', style: TextStyle(color: Colors.red, fontSize: 25)),
         actions: [
           TextButton(
               onPressed: () => Navigator.push(
@@ -64,10 +65,11 @@ class _DestinationState extends State<Destination> {
               ))
         ],
       ),
-      body: ListView(
+      body: 
+      ListView(
         physics: BouncingScrollPhysics(),
         children: <Widget>[
-          Padding(padding: EdgeInsets.only(top: 20)),
+          Padding(padding: EdgeInsets.only(top: 20, bottom: 50)),
           SvgPicture.asset(
             'assets/destination.svg',
             height: 250,
@@ -114,7 +116,7 @@ class _DestinationState extends State<Destination> {
                   //TextField for password
 
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: SelectFormField(
                       type: SelectFormFieldType.dropdown, // or can be dialog
                       //initialValue: 'Kumasi',
@@ -128,12 +130,13 @@ class _DestinationState extends State<Destination> {
                   SizedBox(
                     height: 20,
                   ),
+
                   Padding(
-                    padding: const EdgeInsets.only(left: 10.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: TextFormField(
                       decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.date_range_outlined),
                         hintText: 'Departure Date',
+                        prefixIcon: Icon(Icons.date_range_outlined),
                         enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.black)),
                         focusedBorder: UnderlineInputBorder(
