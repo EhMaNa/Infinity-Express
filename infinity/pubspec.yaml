@@ -23,10 +23,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+
+  animated_text_kit: ^4.2.1
   flutter_svg: 0.23.0
   flutter_dropdown: ^1.0.0+hotfix.1
   select_form_field: ^2.2.0
   carousel_slider: ^4.0.0
+  get: 4.1.4
+  gradient_widgets: ^0.6.0
 
 
   # The following adds the Cupertino Icons font to your application.
