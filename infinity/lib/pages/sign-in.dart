@@ -116,6 +116,7 @@ class _SignInState extends State<SignIn> {
                           await Firebase.initializeApp();
                           ConfirmationResult confirmationResult = await auth.signInWithPhoneNumber(_phoneController.text);
                           UserCredential userCredential = await confirmationResult.confirm('123456');
+                          Navigator.pushNamed(context, '/home');
                           /*auth.verifyPhoneNumber(phoneNumber: _phoneController.text, verificationCompleted: (PhoneAuthCredential credential) async {
                             await auth.signInWithCredential(credential);
                             Navigator.pushNamed(context, '/home');
