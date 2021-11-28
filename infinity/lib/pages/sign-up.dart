@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:infinity/pages/sign-in.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'global.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -210,6 +211,7 @@ class _SignUpState extends State<SignUp> {
                           'name': _nameController.text,
                           'phone': _phoneController.text,
                         });
+                        global = _nameController.text;
                         Navigator.pushNamed(context, '/home');
                       } catch(e)
                       {
