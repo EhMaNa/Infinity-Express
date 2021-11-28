@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "437460895948",
+    "project_id": "infinity-express-6717c",
+    "storage_bucket": "infinity-express-6717c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:437460895948:android:3df5859db934791f9fda69",
+        "android_client_info": {
+          "package_name": "com.example.infinity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "437460895948-macq1i125rp8hnccv5gno0shsld8qe68.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtqCJmpxlvgTrNtfqmYDgjIYxksYtPDSU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "437460895948-macq1i125rp8hnccv5gno0shsld8qe68.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
