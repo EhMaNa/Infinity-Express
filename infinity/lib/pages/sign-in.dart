@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:infinity/pages/sign-up.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -11,13 +9,17 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  String? very;
-  bool code = true;
-  final auth = FirebaseAuth.instance;
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController _phoneController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _passwordcontroller = TextEditingController();
+
+  bool loading = false;
+
+  //textfield states
+  String email = '';
+  String password = '';
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +85,7 @@ class _SignInState extends State<SignIn> {
                         focusColor: Colors.red,
                       ),
                       obscureText: true,
-                      controller: _passwordController,
+                      controller: _passwordcontroller,
                       /*validator: (value) =>
                           value.length < 6 ? 'Incorrect password' : null,
                       onChanged: (value) {
@@ -112,32 +114,8 @@ class _SignInState extends State<SignIn> {
                             ),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10))),
-                        onPressed: () async {
-                          await Firebase.initializeApp();
-                          ConfirmationResult confirmationResult = await auth.signInWithPhoneNumber(_phoneController.text);
-                          UserCredential userCredential = await confirmationResult.confirm('123456');
+                        onPressed: () {
                           Navigator.pushNamed(context, '/home');
-                          /*auth.verifyPhoneNumber(phoneNumber: _phoneController.text, verificationCompleted: (PhoneAuthCredential credential) async {
-                            await auth.signInWithCredential(credential);
-                            Navigator.pushNamed(context, '/home');
-                          }, verificationFailed: (FirebaseAuthException e) {
-                            print('error');
-                          }, codeSent: (String verify, int? resend) {
-                            setState(() {
-                              code = true;
-                              very = verify;
-                            });
-
-                          }, codeAutoRetrievalTimeout: (String verifyId){
-                            setState(() {
-                              very = verifyId;
-                            });
-
-                          },
-                            timeout: Duration(seconds: 60)
-                          );*/
-
-
                         }),
                   ),
 

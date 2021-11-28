@@ -2,7 +2,6 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
-import 'package:infinity/pages/global.dart';
 import 'package:infinity/widgets/book_with_infinity.dart';
 import 'package:path_parsing/path_parsing.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -60,7 +59,7 @@ class _Timeline extends State<Timeline> {
               padding: const EdgeInsets.only(top: 80, right: 200),
               child: Container(
                 child: Text(
-                  'Hello, $global',
+                  'Hello, StudentName!',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
