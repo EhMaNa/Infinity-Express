@@ -1,12 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:infinity/authentication/auththentication.dart';
 import 'package:infinity/pages/home.dart';
 import 'package:infinity/pages/sign-in.dart';
 import 'package:infinity/pages/sign-up.dart';
-import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
