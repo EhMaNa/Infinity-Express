@@ -1,6 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:infinity/authentication/auththentication.dart';
+import 'package:infinity/pages/home.dart';
 import 'package:infinity/pages/sign-in.dart';
 
 class SignUp extends StatefulWidget {
@@ -16,12 +18,16 @@ class _SignUpState extends State<SignUp> {
   TextEditingController _confirmPasswordController = TextEditingController();
   TextEditingController _nameController = TextEditingController();
   TextEditingController _phoneController = TextEditingController();
-
+  Authentication authentication = Authentication();
   //textfield states
   String email = '';
   String password = '';
   String name = '';
   String confirmPassword = '';
+  String phoneNumber = '';
+
+     
+
   @override
   void initState() {
     super.initState();
@@ -54,7 +60,7 @@ class _SignUpState extends State<SignUp> {
                     textCapitalization: TextCapitalization.words,
                     maxLength: 20,
                     decoration: InputDecoration(
-                      hintText: 'Username',
+                      hintText: 'Fullname',
                       enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.black)),
                       focusedBorder: UnderlineInputBorder(
@@ -63,11 +69,11 @@ class _SignUpState extends State<SignUp> {
                           borderSide: BorderSide(color: Colors.red)),
                     ),
                     controller: _nameController,
-                    /*validator: (value) =>
-                        value.isEmpty ? 'UserName field cannot be empty' : null,
+                    validator: (value) =>
+                        value!.isEmpty? 'Please enter your name' : null,
                     onChanged: (value) {
                       setState(() => name = value);
-                    },*/
+                    },
                   ),
                 ),
                 SizedBox(
@@ -87,11 +93,11 @@ class _SignUpState extends State<SignUp> {
                     ),
                     controller: _phoneController,
                     keyboardType: TextInputType.phone,
-                    //validator: (value) =>
-                    //  value.isEmpty ? 'Enter a valid email' : null,
-                    //onChanged: (value) {
-                    //  setState(() => email = value);
-                    //},
+                    validator: (value) =>
+                        value!.isEmpty ? 'Phone NUmber is Inccorrect' : null,
+                    onChanged: (value) {
+                      setState(() => phoneNumber = value);
+                    },
                   ),
                 ),
                 SizedBox(
@@ -111,11 +117,11 @@ class _SignUpState extends State<SignUp> {
                     ),
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
-                    /*  validator: (value) =>
-                        value.isEmpty ? 'Enter a valid email' : null,
+                    validator: (value) =>
+                        value!.isEmpty ? 'Enter a valid email' : null,
                     onChanged: (value) {
                       setState(() => email = value);
-                    },*/
+                    },
                   ),
                 ),
                 SizedBox(
@@ -136,12 +142,12 @@ class _SignUpState extends State<SignUp> {
                     ),
                     obscureText: true,
                     controller: _passwordcontroller,
-                    /*validator: (value) => value.length < 6
+                    validator: (value) => value!.length < 6
                         ? 'Password should contain more than 6 Characters'
                         : null,
                     onChanged: (value) {
                       setState(() => password = value);
-                    },*/
+                    },
                   ),
                 ),
 
@@ -179,26 +185,29 @@ class _SignUpState extends State<SignUp> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: OutlinedButton(
-                    child: Container(
-                        width: 200,
-                        height: 50,
-                        child: Center(
-                            child: Text('Sign Up ',
-                                style: TextStyle(
-                                    fontSize: 17.0,
-                                    fontWeight: FontWeight.w600)))),
-                    style: OutlinedButton.styleFrom(
-                        backgroundColor: Colors.transparent,
-                        primary: Colors.red,
-                        side: BorderSide(
-                          color: Colors.red,
-                        ),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10))),
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/home');
-                    },
-                  ),
+                      child: Container(
+                          width: 200,
+                          height: 50,
+                          child: Center(
+                              child: Text('Sign Up ',
+                                  style: TextStyle(
+                                      fontSize: 17.0,
+                                      fontWeight: FontWeight.w600)))),
+                      style: OutlinedButton.styleFrom(
+                          backgroundColor: Colors.transparent,
+                          primary: Colors.red,
+                          side: BorderSide(
+                            color: Colors.red,
+                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10))),
+                      onPressed: ()  {
+                        if (_formKey.currentState!.validate()) {
+                           _validateAndSignUp();
+
+                          _formKey.currentState!.save();
+                        }
+                      }),
                 ),
 
                 SizedBox(
@@ -216,5 +225,48 @@ class _SignUpState extends State<SignUp> {
         ),
       ]),
     );
+  }
+
+
+   Future _validateAndSignUp() async {
+    EasyLoading.show(
+        status: 'Signing IN',
+        maskType:  EasyLoadingMaskType.custom,
+        dismissOnTap: false);
+     dynamic result = await authentication.signUpWithEmailAndPassword(
+      email: email,
+      password: password,
+      name: name,
+      phoneNumber: phoneNumber);
+   
+ 
+
+    if (result.toString().contains('null')) {
+      setState(() {
+        String error = result.toString().split('-').first;
+        EasyLoading.showError(
+          error,
+          dismissOnTap: false,
+          duration: Duration(seconds: 2),
+          maskType: EasyLoadingMaskType.custom,
+        );
+        print(result);
+      });
+    } else {
+      int count = 0;
+      Navigator.popUntil(context, (route) {
+        return count++ == 4;
+      });
+      EasyLoading.showToast('Welcome to the Family',
+          dismissOnTap: false, duration: Duration(seconds: 2));
+
+      EasyLoading.dismiss();
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Home(),
+          ),
+          (Route<dynamic> route) => false);
+    }
   }
 }
