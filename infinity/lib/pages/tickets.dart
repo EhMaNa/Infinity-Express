@@ -10,8 +10,6 @@ class TicketWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Ticket ticket = Ticket();
-    Person person = Person();
 
     final String currentUserID = Authentication().getCurrentUserID;
 
