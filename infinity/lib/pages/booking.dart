@@ -148,6 +148,7 @@ class _BookingState extends State<Booking> {
       ),
     );
   }
+  
 }
 
 class SeatWidget extends StatefulWidget {
