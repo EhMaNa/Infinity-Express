@@ -1,9 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:infinity/pages/home.dart';
 import 'package:infinity/pages/sign-up.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -11,13 +11,16 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  String? very;
-  bool code = true;
-  final auth = FirebaseAuth.instance;
+  
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  TextEditingController _codeController = TextEditingController();
   TextEditingController _phoneController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+
+  bool loading = false;
+
+  //textfield states
+  String phoneNumber = '';
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +43,7 @@ class _SignInState extends State<SignIn> {
                   SizedBox(
                     height: 20.0,
                   ),
-                  //Textfield for email
+                  //Textfield for Phone Number
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: TextFormField(
@@ -57,38 +60,11 @@ class _SignInState extends State<SignIn> {
                       ),
                       controller: _phoneController,
                       keyboardType: TextInputType.phone,
-                      //validator: (value) =>
-                      //value.isEmpty ? 'Enter a valid email' : null,
-                      /*onChanged: (value) {
-                        setState(() => email = value);
-                      },*/
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  //TextField for password
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.security),
-                        hintText: 'Password',
-                        enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black)),
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.red)),
-                        border: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.red)),
-                        focusColor: Colors.red,
-                      ),
-                      obscureText: true,
-                      controller: _passwordController,
-                      /*validator: (value) =>
-                          value.length < 6 ? 'Incorrect password' : null,
+                      validator: (value) =>
+                      value!.isEmpty ? 'Enter Phone Number' : null,
                       onChanged: (value) {
-                        setState(() => password = value);
-                      },*/
+                        setState(() => phoneNumber = value);
+                      },
                     ),
                   ),
                   SizedBox(height: 30),
@@ -112,46 +88,15 @@ class _SignInState extends State<SignIn> {
                             ),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10))),
-                        onPressed: () async {
-                          await Firebase.initializeApp();
-                          ConfirmationResult confirmationResult = await auth.signInWithPhoneNumber(_phoneController.text);
-                          UserCredential userCredential = await confirmationResult.confirm('123456');
-                          Navigator.pushNamed(context, '/home');
-                          /*auth.verifyPhoneNumber(phoneNumber: _phoneController.text, verificationCompleted: (PhoneAuthCredential credential) async {
-                            await auth.signInWithCredential(credential);
-                            Navigator.pushNamed(context, '/home');
-                          }, verificationFailed: (FirebaseAuthException e) {
-                            print('error');
-                          }, codeSent: (String verify, int? resend) {
-                            setState(() {
-                              code = true;
-                              very = verify;
-                            });
+                        onPressed: ()  {
+                          final phone = _phoneController.text.trim();
 
-                          }, codeAutoRetrievalTimeout: (String verifyId){
-                            setState(() {
-                              very = verifyId;
-                            });
-
-                          },
-                            timeout: Duration(seconds: 60)
-                          );*/
-
-
+                          loginUser(phone, context);
+                          
                         }),
                   ),
 
-                  SizedBox(
-                    height: 15,
-                  ),
-                  TextButton(
-                    onPressed: () {
-
-                    },
-                    child: Text(
-                      "Forgot Password?",
-                    ),
-                  ),
+                  
                   SizedBox(
                     height: 10,
                   ),
@@ -169,4 +114,79 @@ class _SignInState extends State<SignIn> {
       ),
     );
   }
-}
+Future<bool> loginUser(String phone, BuildContext context) async{
+    FirebaseAuth _auth = FirebaseAuth.instance;
+
+     throw { _auth.verifyPhoneNumber(
+        phoneNumber: phone,
+        timeout: Duration(seconds: 60),
+        codeAutoRetrievalTimeout: (String verificationId){} ,
+        verificationCompleted: (AuthCredential credential) async{
+          Navigator.of(context).pop();
+
+          UserCredential result = await _auth.signInWithCredential(credential);
+
+          User? user = result.user;
+
+          if(user != null){
+            Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Home(),
+          ),
+          (Route<dynamic> route) => false);
+          }else{
+            print("Error");
+          }
+
+          //This callback would gets called when verification is done auto maticlly
+        },
+        verificationFailed: (FirebaseAuthException exception){
+          print(exception);
+        },
+        codeSent: (String verificationId, [int? forceResendingToken]){
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) {
+              return AlertDialog(
+                title: Text("Get the code?"),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    TextField(
+                      controller: _codeController,
+                    ),
+                  ],
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: Text("Confirm",
+                    style: TextStyle(color: Colors.red,)),
+                    onPressed: () async{
+                      final code = _codeController.text.trim();
+                      AuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId, smsCode: code);
+
+                      UserCredential result = await _auth.signInWithCredential(credential);
+
+                      User? user = result.user;
+
+                      if(user != null){
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (context) => Home()
+                        ));
+                      }else{
+                        print("Error");
+                      }
+                    },
+                  )
+                ],
+              );
+            }
+          );
+        },
+    )};
+ }}
+  
+
+ 

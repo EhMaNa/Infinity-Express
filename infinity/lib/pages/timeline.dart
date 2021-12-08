@@ -2,7 +2,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gradient_widgets/gradient_widgets.dart';
-import 'package:infinity/pages/global.dart';
+import 'package:infinity/models/student.dart';
 import 'package:infinity/widgets/book_with_infinity.dart';
 import 'package:path_parsing/path_parsing.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -11,6 +11,8 @@ class Timeline extends StatefulWidget {
   @override
   _Timeline createState() => _Timeline();
 }
+
+Person person = Person();
 
 class _Timeline extends State<Timeline> {
   List imgList = [
@@ -57,23 +59,20 @@ class _Timeline extends State<Timeline> {
         new Column(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(top: 80, right: 200),
+              padding: const EdgeInsets.only(top: 80, right: 100),
               child: Container(
                 child: Text(
-                  'Hello, $global',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  ' Hello Darius Twuamsi-Ankrah! ',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
               ),
             ),
             Container(
                 padding: EdgeInsets.only(top: 20),
                 child: AnimatedTextKit(repeatForever: true, animatedTexts: [
-                  WavyAnimatedText(
-                    "Welcome To Infinty Transport",
-                    textAlign: TextAlign.center,
-                    textStyle: TextStyle(fontSize: 20
-                    )
-                  )
+                  WavyAnimatedText("Welcome To Infinty Transport",
+                      textAlign: TextAlign.center,
+                      textStyle: TextStyle(fontSize: 20))
                 ])),
             Padding(
               padding: EdgeInsets.only(top: 30),

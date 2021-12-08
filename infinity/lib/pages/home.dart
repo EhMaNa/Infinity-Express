@@ -8,19 +8,20 @@ const Color kRed = Colors.red;
 const Color kBlack = Colors.black;
 
 class Home extends StatefulWidget {
+  
+
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  int notificationCounter = 0;
   late ScrollController controller;
   int pageIndex = 0;
   late PageController _pageController;
   final List<Widget> _pages = [
     Timeline(),
     Destination(),
-    Tickets(),
+    TicketWidget(),
   ];
 
   @override
@@ -56,8 +57,7 @@ class _HomeState extends State<Home> {
                 horizontal: MediaQuery.of(context).size.width / 10,
               ),
               decoration: BoxDecoration(
-                  color: kBlack,
-                  borderRadius: BorderRadius.circular(8)),
+                  color: kBlack, borderRadius: BorderRadius.circular(8)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -81,7 +81,6 @@ class _HomeState extends State<Home> {
                     icon: Icon(CupertinoIcons.info_circle),
                     onPressed: () => onPageChanged(2),
                   ),
-                  
                 ],
               ),
             ),
