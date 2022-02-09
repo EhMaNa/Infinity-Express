@@ -1,2 +1,4 @@
 # Infinity-Express
-App for infinity transport
+App for Infinity transport
+
+Group Project For Software Engineering
